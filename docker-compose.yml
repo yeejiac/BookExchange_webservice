@@ -1,0 +1,46 @@
+version: '3.7'
+services:
+    redis:
+        restart: always
+        container_name: redis
+        image: redis:alpine
+        ports:
+            - 6379:6379
+        volumes:
+            - /data/redis-data:/data
+        networks:
+            vpcbr:
+                ipv4_address: 172.28.0.2
+        
+    webapi:
+        build:
+            context: .
+        container_name: webapi
+        environment:
+            - TZ=Asia/Taipei
+        restart: always
+        ports:
+            - 8080:8080
+        command: >
+            /bin/bash -c "
+            sleep 10;
+            ./build/main;"
+        networks:
+            vpcbr:
+                ipv4_address: 172.28.0.3
+
+    portainerservice:
+        image: portainer/portainer
+        restart: always
+        volumes:
+            - portainer_data:/data
+            - /var/run/docker.sock:/var/run/docker.sock
+        ports:
+            - "9000:9000"
+
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
