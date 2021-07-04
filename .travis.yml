@@ -1,0 +1,11 @@
+language: go
+services:
+  - docker
+go:
+- 1.15.x
+# - master
+
+script:
+  - docker-compose up -d
+  - docker-compose logs
+  - docker-compose down
