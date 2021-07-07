@@ -8,7 +8,7 @@ import (
 	"net/http"
 
 	"github.com/gomodule/redigo/redis"
-	"github.com/yeejiac/BookExchange_webservice/internal"
+	"github.com/yeejiac/BookExchange_webservice/database"
 	"github.com/yeejiac/BookExchange_webservice/models"
 )
 
@@ -45,10 +45,10 @@ func Modify_BookGroup(w http.ResponseWriter, r *http.Request) { //put
 		panic(err)
 	}
 
-	if internal.RedisCheckKey(t.GroupID, conn) {
+	if database.RedisCheckKey(t.GroupID, conn) {
 		key := t.GroupID
 		value := string(body)
-		internal.RedisSet(key, value, conn)
+		database.RedisSet(key, value, conn)
 	} else {
 		return
 	}
@@ -66,7 +66,7 @@ func Delete_BookGroup(w http.ResponseWriter, r *http.Request) { //delete
 		panic(err)
 	}
 	key := t.GroupID
-	internal.RedisDelete(key, conn)
+	database.RedisDelete(key, conn)
 }
 
 func Check_BookGroup(w http.ResponseWriter, r *http.Request) { //get
@@ -82,7 +82,7 @@ func Check_BookGroup(w http.ResponseWriter, r *http.Request) { //get
 		panic(err)
 	}
 
-	res := internal.RedisGet(t.GroupID, conn)
+	res := database.RedisGet(t.GroupID, conn)
 	u, err := json.Marshal(res)
 	if err != nil {
 		log.Println(err)

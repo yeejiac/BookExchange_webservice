@@ -7,7 +7,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/yeejiac/BookExchange_webservice/internal"
+	"github.com/yeejiac/BookExchange_webservice/database"
 	"github.com/yeejiac/BookExchange_webservice/models"
 )
 
@@ -38,7 +38,7 @@ func Get_User(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	res := internal.RedisGet(t.Name, conn)
+	res := database.RedisGet(t.Name, conn)
 	u, err := json.Marshal(res)
 	if err != nil {
 		log.Println(err)
@@ -62,7 +62,7 @@ func Delete_User(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 	key := t.Name
-	internal.RedisDelete(key, conn)
+	database.RedisDelete(key, conn)
 }
 
 func Modify_User(w http.ResponseWriter, r *http.Request) {
@@ -77,10 +77,10 @@ func Modify_User(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	if internal.RedisCheckKey(t.Name, conn) {
+	if database.RedisCheckKey(t.Name, conn) {
 		key := t.Name
 		value := string(body)
-		internal.RedisSet(key, value, conn)
+		database.RedisSet(key, value, conn)
 	} else {
 		return
 	}

@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/gorilla/mux"
-	"github.com/yeejiac/BookExchange_webservice/internal"
+	"github.com/yeejiac/BookExchange_webservice/database"
 	"github.com/yeejiac/BookExchange_webservice/routes"
 )
 
@@ -18,7 +18,7 @@ func main() {
 	defer f.Close()
 	log.SetOutput(f)
 
-	rc := internal.RedisConnection()
+	rc := database.RedisConnection()
 	defer rc.Close()
 	routes.SetConnectionObject(rc)
 

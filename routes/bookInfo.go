@@ -7,7 +7,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/yeejiac/BookExchange_webservice/internal"
+	"github.com/yeejiac/BookExchange_webservice/database"
 	"github.com/yeejiac/BookExchange_webservice/models"
 )
 
@@ -39,7 +39,7 @@ func Get_BookInfo(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	res := internal.RedisGet(t.ISBN, conn)
+	res := database.RedisGet(t.ISBN, conn)
 	u, err := json.Marshal(res)
 	if err != nil {
 		log.Println(err)
@@ -63,7 +63,7 @@ func Delete_BookInfo(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 	key := t.ISBN
-	internal.RedisDelete(key, conn)
+	database.RedisDelete(key, conn)
 }
 
 func Modify_BookInfo(w http.ResponseWriter, r *http.Request) {
@@ -78,10 +78,10 @@ func Modify_BookInfo(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	if internal.RedisCheckKey(t.ISBN, conn) {
+	if database.RedisCheckKey(t.ISBN, conn) {
 		key := t.ISBN
 		value := string(body)
-		internal.RedisSet(key, value, conn)
+		database.RedisSet(key, value, conn)
 	} else {
 		return
 	}
