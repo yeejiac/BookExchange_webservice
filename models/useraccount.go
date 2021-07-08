@@ -10,6 +10,6 @@ type UserAccount struct {
 type AccountStatus int
 
 const (
-	ABLE = iota
+	ENABLE = iota
 	DISABLE
 )

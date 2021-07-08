@@ -100,3 +100,18 @@ func LoginVerification(username string, password string) bool {
 	fmt.Println(t.Name + " Login failed")
 	return false
 }
+
+func GenerateSession(w http.ResponseWriter, r *http.Request) {
+	session, err := store.Get(r, "session_token")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	session.Options.MaxAge = 600
+	session.Values["auth"] = true
+	err = session.Save(r, w)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+}
