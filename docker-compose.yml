@@ -11,6 +11,21 @@ services:
         networks:
             vpcbr:
                 ipv4_address: 172.28.0.2
+    
+    mariadb:
+        image: mydb
+        container_name: mydb_container
+        build: 
+            context: .
+            dockerfile: Dockerfile.db
+        environment:
+            - TZ=Asia/Taipei
+        ports:
+            - "3306:3306"
+        restart: always
+        networks:
+            vpcbr:
+            ipv4_address: 172.28.0.3
         
     webapi:
         build:
@@ -27,7 +42,7 @@ services:
             ./build/main;"
         networks:
             vpcbr:
-                ipv4_address: 172.28.0.3
+                ipv4_address: 172.28.0.4
 
     portainerservice:
         image: portainer/portainer
