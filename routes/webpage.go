@@ -1,4 +1,4 @@
-package models
+package routes
 
 import (
 	"encoding/json"
@@ -9,8 +9,8 @@ import (
 	"strings"
 
 	"github.com/gorilla/sessions"
-	"github.com/yeejiac/BookExchange_webservice/internal"
-	"github.com/yeejiac/WebAPI_layout/models"
+	"github.com/yeejiac/BookExchange_webservice/database"
+	"github.com/yeejiac/BookExchange_webservice/models"
 )
 
 var store *sessions.CookieStore
@@ -81,7 +81,7 @@ func Register(w http.ResponseWriter, r *http.Request) {
 }
 
 func LoginVerification(username string, password string) bool {
-	res := internal.RedisGet(username, conn)
+	res := database.RedisGet(username, conn)
 	if res == "" {
 		return false
 	}
@@ -99,4 +99,19 @@ func LoginVerification(username string, password string) bool {
 	}
 	fmt.Println(t.Name + " Login failed")
 	return false
+}
+
+func GenerateSession(w http.ResponseWriter, r *http.Request) {
+	session, err := store.Get(r, "session_token")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	session.Options.MaxAge = 600
+	session.Values["auth"] = true
+	err = session.Save(r, w)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 }

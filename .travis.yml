@@ -6,6 +6,7 @@ go:
 # - master
 
 script:
-  - docker-compose up -d
-  - docker-compose logs
-  - docker-compose down
+  - echo "test not set yet"
+  # - docker-compose up -d
+  # - docker-compose logs
+  # - docker-compose down
