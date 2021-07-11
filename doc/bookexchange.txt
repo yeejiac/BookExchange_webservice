@@ -1,1 +1,4 @@
 docker run --name redis-lab -p 6379:6379 -d redis
+
+docker build -f Dockerfile.db -t mydb .
+docker run -d -p 3306:3306 --name mydb-container mydb

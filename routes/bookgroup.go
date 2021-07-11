@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"math/rand"
 	"net/http"
 
 	"github.com/gomodule/redigo/redis"
@@ -16,6 +17,15 @@ var conn redis.Conn
 
 func SetConnectionObject(rc redis.Conn) {
 	conn = rc
+}
+
+func GenerateGroupid(n int) string {
+	const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	b := make([]byte, n)
+	for i := range b {
+		b[i] = letterBytes[rand.Intn(len(letterBytes))]
+	}
+	return string(b)
 }
 
 func Create_BookGroup(w http.ResponseWriter, r *http.Request) { //post

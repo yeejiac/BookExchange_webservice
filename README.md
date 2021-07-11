@@ -6,6 +6,10 @@ The plateform for people to exchange to second hands book, the user is able to c
 - RestfulAPI structure
 - Connect with Redis
 
+## Strutures
+
+![Alt text](./UML.svg)
+
 ## Executions
 
 - compile and execute
