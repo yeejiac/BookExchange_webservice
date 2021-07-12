@@ -2,6 +2,7 @@ package database
 
 import (
 	"database/sql"
+	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -19,4 +20,18 @@ func MariaDBConnection() {
 	// defer the close till after the main function has finished
 	// executing
 	defer db.Close()
+}
+
+func Insert(sql string) {
+	statement, err := mariadb_conn.Prepare(sql)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer statement.Close()
+}
+
+type MariaDB interface {
+	MariaDBConnection()
+	Insert(sql string)
 }
