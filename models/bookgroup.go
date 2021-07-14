@@ -12,7 +12,7 @@ type ExchangeGroup struct {
 	ExpireTime       time.Time   `json:"expiretime"`
 	GroupSize        int         `json:"groupsize"`
 	GroupDescription string      `json:"groupdescription"`
-	Attender         []User      `json:"attender"`
+	Attender         []string    `json:"attender"` //array of attender
 }
 
 type Privacy int

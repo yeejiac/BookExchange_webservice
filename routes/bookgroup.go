@@ -5,11 +5,12 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
-	"math/rand"
 	"net/http"
+	"time"
 
 	"github.com/gomodule/redigo/redis"
 	"github.com/yeejiac/BookExchange_webservice/database"
+	"github.com/yeejiac/BookExchange_webservice/internal"
 	"github.com/yeejiac/BookExchange_webservice/models"
 )
 
@@ -17,15 +18,6 @@ var conn redis.Conn
 
 func SetConnectionObject(rc redis.Conn) {
 	conn = rc
-}
-
-func GenerateGroupid(n int) string {
-	const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789"
-	b := make([]byte, n)
-	for i := range b {
-		b[i] = letterBytes[rand.Intn(len(letterBytes))]
-	}
-	return string(b)
 }
 
 func Create_BookGroup(w http.ResponseWriter, r *http.Request) { //post
@@ -41,6 +33,18 @@ func Create_BookGroup(w http.ResponseWriter, r *http.Request) { //post
 		fmt.Println("decode body error")
 		return
 	}
+	t.GroupID = internal.GenerateGroupid(6)
+	t.EstablishTime = time.Now()
+	t.ExpireTime = t.EstablishTime.Add(time.Hour * time.Duration(24))
+	b, err := json.Marshal(t)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	key := t.GroupID
+	value := string(b)
+	database.RedisSetTimeout(key, value, 86400, conn) //expired after one day
 }
 
 func Modify_BookGroup(w http.ResponseWriter, r *http.Request) { //put
