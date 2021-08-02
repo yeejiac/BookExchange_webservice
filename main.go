@@ -23,6 +23,7 @@ func main() {
 	routes.SetConnectionObject(rc)
 
 	r := mux.NewRouter()
+	//r.Use(Middleware) Use Middleware Validate Token
 	r.HandleFunc("/index", routes.Home).Methods("GET")
 	r.HandleFunc("/login", routes.Login).Methods("GET")
 	r.HandleFunc("/register", routes.Register).Methods("GET")

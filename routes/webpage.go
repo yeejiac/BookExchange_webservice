@@ -6,12 +6,25 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"strconv"
 	"strings"
+	"time"
 
+	"github.com/dgrijalva/jwt-go"
 	"github.com/gorilla/sessions"
 	"github.com/yeejiac/BookExchange_webservice/database"
 	"github.com/yeejiac/BookExchange_webservice/models"
 )
+
+// custom claims
+type Claims struct {
+	Account string `json:"account"`
+	Role    string `json:"role"`
+	jwt.StandardClaims
+}
+
+// jwt secret key
+var jwtSecret = []byte("secret")
 
 var store *sessions.CookieStore
 
@@ -95,6 +108,7 @@ func LoginVerification(username string, password string) bool {
 
 	if t.Password == password {
 		fmt.Println(t.Name + " Login success")
+		generateToken(username)
 		return true
 	}
 	fmt.Println(t.Name + " Login failed")
@@ -114,4 +128,28 @@ func GenerateSession(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+}
+
+func generateToken(username string) string {
+	now := time.Now()
+	jwtId := username + strconv.FormatInt(now.Unix(), 10)
+	role := "Member"
+
+	// set claims and sign
+	claims := Claims{
+		Account: username,
+		Role:    role,
+		StandardClaims: jwt.StandardClaims{
+			Audience:  username,
+			ExpiresAt: now.Add(20 * time.Second).Unix(),
+			Id:        jwtId,
+			IssuedAt:  now.Unix(),
+			Issuer:    "yeejiac",
+			NotBefore: now.Add(10 * time.Second).Unix(),
+			Subject:   username,
+		},
+	}
+	tokenClaims := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	token, _ := tokenClaims.SignedString(jwtSecret)
+	return token
 }
