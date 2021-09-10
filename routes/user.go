@@ -6,8 +6,10 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/mail"
 
 	"github.com/yeejiac/BookExchange_webservice/database"
+	"github.com/yeejiac/BookExchange_webservice/internal"
 	"github.com/yeejiac/BookExchange_webservice/models"
 )
 
@@ -19,11 +21,45 @@ func Create_User(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Println(string(body))
 	var t models.User
-	res := json.Unmarshal(body, &t)
-	if res != nil {
+	err = json.Unmarshal(body, &t)
+	if err != nil {
 		fmt.Println("decode body error")
 		return
 	}
+
+	if !CheckUserDataApply(t) {
+		var status models.Status
+		status.Status = "email wrong"
+		b, err := json.Marshal(status)
+		if err != nil {
+			log.Println(err)
+			return
+		}
+
+		w.Header().Set("Content-Type", "application/json;charset=UTF-8")
+		w.WriteHeader(http.StatusOK)
+		w.Write(b)
+		return
+	}
+	var status models.Status
+	if database.RedisCheckKey(t.Name, conn) {
+		fmt.Println("Already Exist")
+		status.Status = "Failed"
+	} else {
+		go internal.SendRegisterMail(t)
+		status.Status = "Success"
+		key := t.Name
+		value := string(body)
+		database.RedisSet(key, value, conn)
+	}
+	b, err := json.Marshal(status)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json;charset=UTF-8")
+	w.WriteHeader(http.StatusOK)
+	w.Write(b)
 }
 
 func Get_User(w http.ResponseWriter, r *http.Request) {
@@ -84,4 +120,9 @@ func Modify_User(w http.ResponseWriter, r *http.Request) {
 	} else {
 		return
 	}
+}
+
+func CheckUserDataApply(userinfo models.User) bool {
+	_, err := mail.ParseAddress(userinfo.Email)
+	return err == nil
 }

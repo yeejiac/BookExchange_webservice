@@ -25,6 +25,7 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/index", routes.Home).Methods("GET")
 	r.HandleFunc("/login", routes.Login).Methods("GET")
+	r.HandleFunc("/login", routes.Login).Methods("POST")
 	r.HandleFunc("/register", routes.Register).Methods("GET")
 
 	r.HandleFunc("/api/bookgroup", routes.Check_BookGroup).Methods("GET")
