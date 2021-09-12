@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"html/template"
+	"io/ioutil"
 	"log"
 	"net/http"
-	"strings"
 
 	"github.com/gorilla/sessions"
 	"github.com/yeejiac/BookExchange_webservice/database"
@@ -44,13 +44,28 @@ func Home(w http.ResponseWriter, r *http.Request) {
 func Login(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Login method:", r.Method) //取得請求的方法
 	r.ParseForm()
+
 	if r.Method == "GET" {
 		t, _ := template.ParseFiles("./views/login.gtpl")
 		log.Println(t.Execute(w, nil))
 	} else {
-		usr := strings.Join(r.Form["Username"], " ")
-		password := strings.Join(r.Form["Password"], " ")
-		if LoginVerification(usr, password) { // login request pass
+		// usr := strings.Join(r.Form["Username"], " ")
+		// password := strings.Join(r.Form["Password"], " ")
+		body, err := ioutil.ReadAll(r.Body)
+		if err != nil {
+			fmt.Println("parse body error")
+			panic(err)
+		}
+		fmt.Println(string(body))
+		var t models.User
+		err = json.Unmarshal(body, &t)
+		if err != nil {
+			fmt.Println("decode body error")
+			return
+		}
+
+		status := models.Status{}
+		if LoginVerification(t.Username, t.Password) { // login request pass
 			session, err := store.Get(r, "session_token")
 			if err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -63,11 +78,20 @@ func Login(w http.ResponseWriter, r *http.Request) {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
 				return
 			}
-			http.Redirect(w, r, "/index", http.StatusSeeOther)
-			fmt.Println("success")
+			// http.Redirect(w, r, "/index", http.StatusSeeOther)
+			fmt.Println("Login success")
+			status.Status = "True"
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusCreated)
+			json.NewEncoder(w).Encode(status)
+			return
 		} else {
 			fmt.Println("Login failed")
-			http.Redirect(w, r, "/login", http.StatusSeeOther)
+			// http.Redirect(w, r, "/login", http.StatusSeeOther)
+			status.Status = "False"
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusCreated)
+			json.NewEncoder(w).Encode(status)
 			return
 		}
 	}
