@@ -3,9 +3,11 @@ package routes
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/yeejiac/BookExchange_webservice/database"
 	"github.com/yeejiac/BookExchange_webservice/models"
@@ -28,27 +30,28 @@ func Create_BookInfo(w http.ResponseWriter, r *http.Request) {
 }
 
 func Get_BookInfo(w http.ResponseWriter, r *http.Request) {
-	body, err := ioutil.ReadAll(r.Body)
+	r.ParseForm()
+	in, header, err := r.FormFile("image")
 	if err != nil {
-		panic(err)
+		fmt.Println("parse image error")
 	}
-	log.Println(string(body))
-	var t models.BookInfo
-	err = json.Unmarshal(body, &t)
-	if err != nil {
-		panic(err)
-	}
+	defer in.Close()
+	fmt.Printf("Uploaded File: %+v\n", header.Filename)
+	fmt.Printf("File Size: %+v\n", header.Size)
+	fmt.Printf("MIME Header: %+v\n", header.Header)
 
-	res := database.RedisGet(t.ISBN, conn)
-	u, err := json.Marshal(res)
+	tmpfile, err := os.Create("./tempfile/" + header.Filename)
+	defer tmpfile.Close()
 	if err != nil {
-		log.Println(err)
+		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
-
-	w.Header().Set("Content-Type", "application/json;charset=UTF-8")
-	w.WriteHeader(http.StatusOK)
-	w.Write(u)
+	_, err = io.Copy(tmpfile, in)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	fmt.Fprintf(w, "Successfully Uploaded File\n")
 }
 
 func Delete_BookInfo(w http.ResponseWriter, r *http.Request) {

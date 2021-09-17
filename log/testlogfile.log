@@ -37,3 +37,21 @@
 2021/09/11 21:50:41 <nil>
 2021/09/11 22:11:50 <nil>
 2021/09/11 22:11:57 <nil>
+2021/09/17 05:51:30 http: panic serving 192.168.56.1:49238: runtime error: invalid memory address or nil pointer dereference
+goroutine 7 [running]:
+net/http.(*conn).serve.func1(0xc0000ef0e0)
+	/usr/lib/golang/src/net/http/server.go:1801 +0x147
+panic(0x8290a0, 0xb4f8b0)
+	/usr/lib/golang/src/runtime/panic.go:975 +0x47a
+github.com/yeejiac/BookExchange_webservice/routes.Get_BookInfo(0x91bcc0, 0xc0000d62a0, 0xc0000de300)
+	/home/Project/BookExchange/routes/bookInfo.go:38 +0xa6
+net/http.HandlerFunc.ServeHTTP(0x8b4828, 0x91bcc0, 0xc0000d62a0, 0xc0000de300)
+	/usr/lib/golang/src/net/http/server.go:2042 +0x44
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc0000e2000, 0x91bcc0, 0xc0000d62a0, 0xc0000de100)
+	/root/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0xd3
+net/http.serverHandler.ServeHTTP(0xc0000d61c0, 0x91bcc0, 0xc0000d62a0, 0xc0000de100)
+	/usr/lib/golang/src/net/http/server.go:2843 +0xa3
+net/http.(*conn).serve(0xc0000ef0e0, 0x91cb80, 0xc000065980)
+	/usr/lib/golang/src/net/http/server.go:1925 +0x8ad
+created by net/http.(*Server).Serve
+	/usr/lib/golang/src/net/http/server.go:2969 +0x36c
