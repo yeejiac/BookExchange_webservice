@@ -31,6 +31,19 @@ func Create_BookInfo(w http.ResponseWriter, r *http.Request) {
 
 func Get_BookInfo(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		fmt.Println("parse body error")
+		panic(err)
+	}
+	fmt.Println(string(body))
+	var t models.BookInfo
+	err = json.Unmarshal(body, &t)
+	if err != nil {
+		fmt.Println("decode body error")
+		return
+	}
+
 	in, header, err := r.FormFile("image")
 	if err != nil {
 		fmt.Println("parse image error")
@@ -41,7 +54,6 @@ func Get_BookInfo(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("MIME Header: %+v\n", header.Header)
 
 	tmpfile, err := os.Create("./tempfile/" + header.Filename)
-	defer tmpfile.Close()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
