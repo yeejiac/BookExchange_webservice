@@ -1,7 +1,5 @@
 package models
 
-import "time"
-
 type BookCatelog int
 
 const (
@@ -18,9 +16,6 @@ const (
 
 type BookInfo struct {
 	BookName    string      `json:"bookname"`
-	ISBN        string      `json:"isbn"`
-	Writer      string      `json:"writer"`
-	Publisher   string      `json:"publisher"`
-	PublishDate time.Time   `json:"publishdate"`
-	BookCatelog BookCatelog `json:"bookCatelog"`
+	BookCatelog BookCatelog `json:"bookcatelog"`
+	ImageName   string      `json:"imagename"`
 }
