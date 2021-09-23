@@ -22,6 +22,9 @@ func main() {
 	defer rc.Close()
 	routes.SetConnectionObject(rc)
 
+	mariadb := database.MariaDBConnection()
+	defer mariadb.Close()
+
 	r := mux.NewRouter()
 	r.HandleFunc("/index", routes.Home).Methods("GET")
 	r.HandleFunc("/login", routes.Login).Methods("GET")
@@ -39,7 +42,8 @@ func main() {
 	r.HandleFunc("/api/user", routes.Delete_User).Methods("DELETE")
 
 	r.HandleFunc("/api/BookInfoImage", routes.Get_BookImage).Methods("POST")
-	r.HandleFunc("/api/BookInfo", routes.Get_BookInfo).Methods("POST")
+	r.HandleFunc("/api/BookInfo", routes.Get_BookInfo).Methods("GET")
+	r.HandleFunc("/api/BookInfo", routes.Create_BookInfo).Methods("POST")
 	r.HandleFunc("/api/BookInfo", routes.Modify_BookInfo).Methods("PUT")
 	r.HandleFunc("/api/BookInfo", routes.Delete_BookInfo).Methods("DELETE")
 	if err := http.ListenAndServe(":8080", r); err != nil {

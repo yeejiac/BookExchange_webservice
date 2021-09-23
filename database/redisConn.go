@@ -16,7 +16,7 @@ func RedisConnection() redis.Conn {
 		panic(err)
 	}
 	// conn = rc
-	fmt.Println("db conn success")
+	fmt.Println("redis conn success")
 	return rc
 }
 

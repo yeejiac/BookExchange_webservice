@@ -13,7 +13,7 @@ import (
 	"github.com/yeejiac/BookExchange_webservice/models"
 )
 
-func Create_BookInfo(w http.ResponseWriter, r *http.Request) {
+func Get_BookInfo(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		fmt.Println("parse body error")
@@ -29,7 +29,7 @@ func Create_BookInfo(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func Get_BookInfo(w http.ResponseWriter, r *http.Request) {
+func Create_BookInfo(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 
 	var t models.BookInfo
