@@ -181,3 +181,304 @@ net/http.(*conn).serve(0xc0000ef040, 0x922700, 0xc000065980)
 	/usr/lib/golang/src/net/http/server.go:1925 +0x8ad
 created by net/http.(*Server).Serve
 	/usr/lib/golang/src/net/http/server.go:2969 +0x36c
+2021/09/25 21:02:53 <nil>
+2021/09/25 23:26:04 http: panic serving 192.168.56.1:58120: runtime error: invalid memory address or nil pointer dereference
+goroutine 8 [running]:
+net/http.(*conn).serve.func1(0xc0000ef400)
+	/usr/lib/golang/src/net/http/server.go:1801 +0x147
+panic(0x82f3e0, 0xb59900)
+	/usr/lib/golang/src/runtime/panic.go:975 +0x47a
+database/sql.(*DB).conn(0x0, 0x923e40, 0xc0000260c0, 0x7f190854b101, 0x4830e5, 0x0, 0xc00004a800)
+	/usr/lib/golang/src/database/sql/sql.go:1190 +0x41
+database/sql.(*DB).prepare(0x0, 0x923e40, 0xc0000260c0, 0xc000024280, 0x7a, 0xc0000a6001, 0x7a, 0xc000024280, 0x7a)
+	/usr/lib/golang/src/database/sql/sql.go:1482 +0x58
+database/sql.(*DB).PrepareContext(0x0, 0x923e40, 0xc0000260c0, 0xc000024280, 0x7a, 0xc000024280, 0x7a, 0xc0000cd978)
+	/usr/lib/golang/src/database/sql/sql.go:1455 +0x99
+database/sql.(*DB).Prepare(...)
+	/usr/lib/golang/src/database/sql/sql.go:1472
+github.com/yeejiac/BookExchange_webservice/database.InsertBookInfo(0xc000027c60, 0x3, 0x4, 0x0, 0x0)
+	/home/Project/BookExchange_webservice/database/mariadbConn.go:30 +0x165
+github.com/yeejiac/BookExchange_webservice/routes.Create_BookInfo(0x922f00, 0xc0000d6380, 0xc0000de700)
+	/home/Project/BookExchange_webservice/routes/bookInfo.go:56 +0x2c9
+net/http.HandlerFunc.ServeHTTP(0x8bb1d0, 0x922f00, 0xc0000d6380, 0xc0000de700)
+	/usr/lib/golang/src/net/http/server.go:2042 +0x44
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc0000e2000, 0x922f00, 0xc0000d6380, 0xc0000de500)
+	/root/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0xd3
+net/http.serverHandler.ServeHTTP(0xc0000d61c0, 0x922f00, 0xc0000d6380, 0xc0000de500)
+	/usr/lib/golang/src/net/http/server.go:2843 +0xa3
+net/http.(*conn).serve(0xc0000ef400, 0x923e00, 0xc0000659c0)
+	/usr/lib/golang/src/net/http/server.go:1925 +0x8ad
+created by net/http.(*Server).Serve
+	/usr/lib/golang/src/net/http/server.go:2969 +0x36c
+2021/09/25 23:26:45 http: panic serving 192.168.56.1:58601: runtime error: invalid memory address or nil pointer dereference
+goroutine 11 [running]:
+net/http.(*conn).serve.func1(0xc0000ef540)
+	/usr/lib/golang/src/net/http/server.go:1801 +0x147
+panic(0x82f3e0, 0xb59900)
+	/usr/lib/golang/src/runtime/panic.go:975 +0x47a
+database/sql.(*DB).conn(0x0, 0x923e40, 0xc0000260c0, 0x7f190854b101, 0x4830e5, 0x0, 0xc00004a800)
+	/usr/lib/golang/src/database/sql/sql.go:1190 +0x41
+database/sql.(*DB).prepare(0x0, 0x923e40, 0xc0000260c0, 0xc000024300, 0x7a, 0xc0000fe801, 0x7a, 0xc000024300, 0x7a)
+	/usr/lib/golang/src/database/sql/sql.go:1482 +0x58
+database/sql.(*DB).PrepareContext(0x0, 0x923e40, 0xc0000260c0, 0xc000024300, 0x7a, 0xc000024300, 0x7a, 0xc0000cd978)
+	/usr/lib/golang/src/database/sql/sql.go:1455 +0x99
+database/sql.(*DB).Prepare(...)
+	/usr/lib/golang/src/database/sql/sql.go:1472
+github.com/yeejiac/BookExchange_webservice/database.InsertBookInfo(0xc000027d30, 0x3, 0x4, 0xc000027d33, 0x3)
+	/home/Project/BookExchange_webservice/database/mariadbConn.go:30 +0x165
+github.com/yeejiac/BookExchange_webservice/routes.Create_BookInfo(0x922f00, 0xc0000d6460, 0xc0000dea00)
+	/home/Project/BookExchange_webservice/routes/bookInfo.go:56 +0x2c9
+net/http.HandlerFunc.ServeHTTP(0x8bb1d0, 0x922f00, 0xc0000d6460, 0xc0000dea00)
+	/usr/lib/golang/src/net/http/server.go:2042 +0x44
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc0000e2000, 0x922f00, 0xc0000d6460, 0xc0000de800)
+	/root/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0xd3
+net/http.serverHandler.ServeHTTP(0xc0000d61c0, 0x922f00, 0xc0000d6460, 0xc0000de800)
+	/usr/lib/golang/src/net/http/server.go:2843 +0xa3
+net/http.(*conn).serve(0xc0000ef540, 0x923e00, 0xc000065c00)
+	/usr/lib/golang/src/net/http/server.go:1925 +0x8ad
+created by net/http.(*Server).Serve
+	/usr/lib/golang/src/net/http/server.go:2969 +0x36c
+2021/09/25 23:28:18 http: panic serving 192.168.56.1:57366: runtime error: invalid memory address or nil pointer dereference
+goroutine 8 [running]:
+net/http.(*conn).serve.func1(0xc0000ef4a0)
+	/usr/lib/golang/src/net/http/server.go:1801 +0x147
+panic(0x82f3e0, 0xb59900)
+	/usr/lib/golang/src/runtime/panic.go:975 +0x47a
+database/sql.(*DB).conn(0x0, 0x923e40, 0xc0000260c0, 0x1, 0x63, 0x80, 0xc0000cd818)
+	/usr/lib/golang/src/database/sql/sql.go:1190 +0x41
+database/sql.(*DB).prepare(0x0, 0x923e40, 0xc0000260c0, 0xc000036150, 0x62, 0x1, 0x63, 0x0, 0x0)
+	/usr/lib/golang/src/database/sql/sql.go:1482 +0x58
+database/sql.(*DB).PrepareContext(0x0, 0x923e40, 0xc0000260c0, 0xc000036150, 0x62, 0x63, 0x0, 0x0)
+	/usr/lib/golang/src/database/sql/sql.go:1455 +0x99
+database/sql.(*DB).Prepare(...)
+	/usr/lib/golang/src/database/sql/sql.go:1472
+github.com/yeejiac/BookExchange_webservice/database.InsertBookInfo(0xc000027c10, 0x3, 0x4, 0xc000027c13, 0x3)
+	/home/Project/BookExchange_webservice/database/mariadbConn.go:31 +0x1ee
+github.com/yeejiac/BookExchange_webservice/routes.Create_BookInfo(0x922ec0, 0xc0000d62a0, 0xc0000de400)
+	/home/Project/BookExchange_webservice/routes/bookInfo.go:56 +0x2c9
+net/http.HandlerFunc.ServeHTTP(0x8bb1d0, 0x922ec0, 0xc0000d62a0, 0xc0000de400)
+	/usr/lib/golang/src/net/http/server.go:2042 +0x44
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc0000e2000, 0x922ec0, 0xc0000d62a0, 0xc0000de200)
+	/root/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0xd3
+net/http.serverHandler.ServeHTTP(0xc0000d61c0, 0x922ec0, 0xc0000d62a0, 0xc0000de200)
+	/usr/lib/golang/src/net/http/server.go:2843 +0xa3
+net/http.(*conn).serve(0xc0000ef4a0, 0x923e00, 0xc0000659c0)
+	/usr/lib/golang/src/net/http/server.go:1925 +0x8ad
+created by net/http.(*Server).Serve
+	/usr/lib/golang/src/net/http/server.go:2969 +0x36c
+2021/09/25 23:29:27 http: panic serving 192.168.56.1:59237: runtime error: invalid memory address or nil pointer dereference
+goroutine 8 [running]:
+net/http.(*conn).serve.func1(0xc0000ef4a0)
+	/usr/lib/golang/src/net/http/server.go:1801 +0x147
+panic(0x82f3e0, 0xb59900)
+	/usr/lib/golang/src/runtime/panic.go:975 +0x47a
+database/sql.(*DB).conn(0x0, 0x923e40, 0xc0000260c0, 0x1, 0x67, 0x80, 0xc0000cd818)
+	/usr/lib/golang/src/database/sql/sql.go:1190 +0x41
+database/sql.(*DB).prepare(0x0, 0x923e40, 0xc0000260c0, 0xc000036150, 0x66, 0x1, 0x67, 0x0, 0x0)
+	/usr/lib/golang/src/database/sql/sql.go:1482 +0x58
+database/sql.(*DB).PrepareContext(0x0, 0x923e40, 0xc0000260c0, 0xc000036150, 0x66, 0x67, 0x0, 0x0)
+	/usr/lib/golang/src/database/sql/sql.go:1455 +0x99
+database/sql.(*DB).Prepare(...)
+	/usr/lib/golang/src/database/sql/sql.go:1472
+github.com/yeejiac/BookExchange_webservice/database.InsertBookInfo(0xc000027c10, 0x3, 0x4, 0xc000027c13, 0x3)
+	/home/Project/BookExchange_webservice/database/mariadbConn.go:31 +0x1ee
+github.com/yeejiac/BookExchange_webservice/routes.Create_BookInfo(0x922ec0, 0xc0000d62a0, 0xc0000de400)
+	/home/Project/BookExchange_webservice/routes/bookInfo.go:56 +0x2c9
+net/http.HandlerFunc.ServeHTTP(0x8bb1d0, 0x922ec0, 0xc0000d62a0, 0xc0000de400)
+	/usr/lib/golang/src/net/http/server.go:2042 +0x44
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc0000e2000, 0x922ec0, 0xc0000d62a0, 0xc0000de200)
+	/root/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0xd3
+net/http.serverHandler.ServeHTTP(0xc0000d61c0, 0x922ec0, 0xc0000d62a0, 0xc0000de200)
+	/usr/lib/golang/src/net/http/server.go:2843 +0xa3
+net/http.(*conn).serve(0xc0000ef4a0, 0x923e00, 0xc0000659c0)
+	/usr/lib/golang/src/net/http/server.go:1925 +0x8ad
+created by net/http.(*Server).Serve
+	/usr/lib/golang/src/net/http/server.go:2969 +0x36c
+2021/09/25 23:30:02 http: panic serving 192.168.56.1:52567: runtime error: invalid memory address or nil pointer dereference
+goroutine 10 [running]:
+net/http.(*conn).serve.func1(0xc0000ef5e0)
+	/usr/lib/golang/src/net/http/server.go:1801 +0x147
+panic(0x82f3e0, 0xb59900)
+	/usr/lib/golang/src/runtime/panic.go:975 +0x47a
+database/sql.(*DB).conn(0x0, 0x923e40, 0xc0000260c0, 0x1, 0x67, 0x800, 0xc0000cd818)
+	/usr/lib/golang/src/database/sql/sql.go:1190 +0x41
+database/sql.(*DB).prepare(0x0, 0x923e40, 0xc0000260c0, 0xc000036230, 0x66, 0x801, 0x67, 0x0, 0x0)
+	/usr/lib/golang/src/database/sql/sql.go:1482 +0x58
+database/sql.(*DB).PrepareContext(0x0, 0x923e40, 0xc0000260c0, 0xc000036230, 0x66, 0x67, 0x0, 0x0)
+	/usr/lib/golang/src/database/sql/sql.go:1455 +0x99
+database/sql.(*DB).Prepare(...)
+	/usr/lib/golang/src/database/sql/sql.go:1472
+github.com/yeejiac/BookExchange_webservice/database.InsertBookInfo(0xc000027ce0, 0x3, 0x4, 0xc000027ce3, 0x3)
+	/home/Project/BookExchange_webservice/database/mariadbConn.go:31 +0x1ee
+github.com/yeejiac/BookExchange_webservice/routes.Create_BookInfo(0x922ec0, 0xc0000d6380, 0xc0000de700)
+	/home/Project/BookExchange_webservice/routes/bookInfo.go:56 +0x2c9
+net/http.HandlerFunc.ServeHTTP(0x8bb1d0, 0x922ec0, 0xc0000d6380, 0xc0000de700)
+	/usr/lib/golang/src/net/http/server.go:2042 +0x44
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc0000e2000, 0x922ec0, 0xc0000d6380, 0xc0000de500)
+	/root/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0xd3
+net/http.serverHandler.ServeHTTP(0xc0000d61c0, 0x922ec0, 0xc0000d6380, 0xc0000de500)
+	/usr/lib/golang/src/net/http/server.go:2843 +0xa3
+net/http.(*conn).serve(0xc0000ef5e0, 0x923e00, 0xc000065b80)
+	/usr/lib/golang/src/net/http/server.go:1925 +0x8ad
+created by net/http.(*Server).Serve
+	/usr/lib/golang/src/net/http/server.go:2969 +0x36c
+2021/09/25 23:32:31 http: panic serving 192.168.56.1:57368: runtime error: invalid memory address or nil pointer dereference
+goroutine 8 [running]:
+net/http.(*conn).serve.func1(0xc0000ef400)
+	/usr/lib/golang/src/net/http/server.go:1801 +0x147
+panic(0x82f3e0, 0xb59900)
+	/usr/lib/golang/src/runtime/panic.go:975 +0x47a
+database/sql.(*DB).conn(0x0, 0x923e60, 0xc0000260c0, 0x1, 0x67, 0x80, 0xc0000cd7f8)
+	/usr/lib/golang/src/database/sql/sql.go:1190 +0x41
+database/sql.(*DB).prepare(0x0, 0x923e60, 0xc0000260c0, 0xc000036150, 0x66, 0x1, 0x67, 0x0, 0x0)
+	/usr/lib/golang/src/database/sql/sql.go:1482 +0x58
+database/sql.(*DB).PrepareContext(0x0, 0x923e60, 0xc0000260c0, 0xc000036150, 0x66, 0x67, 0x0, 0x0)
+	/usr/lib/golang/src/database/sql/sql.go:1455 +0x99
+database/sql.(*DB).Prepare(...)
+	/usr/lib/golang/src/database/sql/sql.go:1472
+github.com/yeejiac/BookExchange_webservice/database.InsertBookInfo(0xc000027c10, 0x3, 0x4, 0xc000027c13, 0x3)
+	/home/Project/BookExchange_webservice/database/mariadbConn.go:31 +0x1fa
+github.com/yeejiac/BookExchange_webservice/routes.Create_BookInfo(0x922f20, 0xc0000d62a0, 0xc0000de400)
+	/home/Project/BookExchange_webservice/routes/bookInfo.go:56 +0x2c9
+net/http.HandlerFunc.ServeHTTP(0x8bb1e0, 0x922f20, 0xc0000d62a0, 0xc0000de400)
+	/usr/lib/golang/src/net/http/server.go:2042 +0x44
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc0000e2000, 0x922f20, 0xc0000d62a0, 0xc0000de200)
+	/root/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0xd3
+net/http.serverHandler.ServeHTTP(0xc0000d61c0, 0x922f20, 0xc0000d62a0, 0xc0000de200)
+	/usr/lib/golang/src/net/http/server.go:2843 +0xa3
+net/http.(*conn).serve(0xc0000ef400, 0x923e20, 0xc0000659c0)
+	/usr/lib/golang/src/net/http/server.go:1925 +0x8ad
+created by net/http.(*Server).Serve
+	/usr/lib/golang/src/net/http/server.go:2969 +0x36c
+2021/09/25 23:33:52 http: panic serving 192.168.56.1:49943: runtime error: invalid memory address or nil pointer dereference
+goroutine 8 [running]:
+net/http.(*conn).serve.func1(0xc0000ef400)
+	/usr/lib/golang/src/net/http/server.go:1801 +0x147
+panic(0x82f3e0, 0xb59900)
+	/usr/lib/golang/src/runtime/panic.go:975 +0x47a
+database/sql.(*Stmt).Close(0x0, 0x0, 0x0)
+	/usr/lib/golang/src/database/sql/sql.go:2722 +0x3e
+github.com/yeejiac/BookExchange_webservice/database.InsertBookInfo(0xc000027c10, 0x3, 0x4, 0xc000027c13, 0x3)
+	/home/Project/BookExchange_webservice/database/mariadbConn.go:38 +0x23b
+github.com/yeejiac/BookExchange_webservice/routes.Create_BookInfo(0x922f20, 0xc0000d62a0, 0xc0000de400)
+	/home/Project/BookExchange_webservice/routes/bookInfo.go:56 +0x2c9
+net/http.HandlerFunc.ServeHTTP(0x8bb1e0, 0x922f20, 0xc0000d62a0, 0xc0000de400)
+	/usr/lib/golang/src/net/http/server.go:2042 +0x44
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc0000e2000, 0x922f20, 0xc0000d62a0, 0xc0000de200)
+	/root/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0xd3
+net/http.serverHandler.ServeHTTP(0xc0000d61c0, 0x922f20, 0xc0000d62a0, 0xc0000de200)
+	/usr/lib/golang/src/net/http/server.go:2843 +0xa3
+net/http.(*conn).serve(0xc0000ef400, 0x923e20, 0xc0000659c0)
+	/usr/lib/golang/src/net/http/server.go:1925 +0x8ad
+created by net/http.(*Server).Serve
+	/usr/lib/golang/src/net/http/server.go:2969 +0x36c
+2021/09/25 23:46:18 http: panic serving 192.168.56.1:56375: runtime error: invalid memory address or nil pointer dereference
+goroutine 8 [running]:
+net/http.(*conn).serve.func1(0xc0000ef400)
+	/usr/lib/golang/src/net/http/server.go:1801 +0x147
+panic(0x82f3e0, 0xb59900)
+	/usr/lib/golang/src/runtime/panic.go:975 +0x47a
+database/sql.(*Stmt).Close(0x0, 0x0, 0x0)
+	/usr/lib/golang/src/database/sql/sql.go:2722 +0x3e
+github.com/yeejiac/BookExchange_webservice/database.InsertBookInfo(0xc000027c10, 0x3, 0x4, 0xc000027c13, 0x3, 0xc0000d29c0)
+	/home/Project/BookExchange_webservice/database/mariadbConn.go:35 +0x23d
+github.com/yeejiac/BookExchange_webservice/routes.Create_BookInfo(0x922f40, 0xc0000d62a0, 0xc0000de400)
+	/home/Project/BookExchange_webservice/routes/bookInfo.go:56 +0x2d5
+net/http.HandlerFunc.ServeHTTP(0x8bb1e0, 0x922f40, 0xc0000d62a0, 0xc0000de400)
+	/usr/lib/golang/src/net/http/server.go:2042 +0x44
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc0000e2000, 0x922f40, 0xc0000d62a0, 0xc0000de200)
+	/root/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0xd3
+net/http.serverHandler.ServeHTTP(0xc0000d61c0, 0x922f40, 0xc0000d62a0, 0xc0000de200)
+	/usr/lib/golang/src/net/http/server.go:2843 +0xa3
+net/http.(*conn).serve(0xc0000ef400, 0x923e40, 0xc0000659c0)
+	/usr/lib/golang/src/net/http/server.go:1925 +0x8ad
+created by net/http.(*Server).Serve
+	/usr/lib/golang/src/net/http/server.go:2969 +0x36c
+2021/09/25 23:53:34 http: panic serving 192.168.56.1:55566: runtime error: invalid memory address or nil pointer dereference
+goroutine 9 [running]:
+net/http.(*conn).serve.func1(0xc0000f15e0)
+	/usr/lib/golang/src/net/http/server.go:1801 +0x147
+panic(0x82f3e0, 0xb59900)
+	/usr/lib/golang/src/runtime/panic.go:975 +0x47a
+database/sql.(*Stmt).Close(0x0, 0x0, 0x0)
+	/usr/lib/golang/src/database/sql/sql.go:2722 +0x3e
+github.com/yeejiac/BookExchange_webservice/database.InsertBookInfo(0xc000027c20, 0x3, 0x4, 0xc000027c23, 0x3, 0xc0000d29c0)
+	/home/Project/BookExchange_webservice/database/mariadbConn.go:43 +0x23d
+github.com/yeejiac/BookExchange_webservice/routes.Create_BookInfo(0x922fe0, 0xc0000d62a0, 0xc0000de400)
+	/home/Project/BookExchange_webservice/routes/bookInfo.go:56 +0x2d5
+net/http.HandlerFunc.ServeHTTP(0x8bb240, 0x922fe0, 0xc0000d62a0, 0xc0000de400)
+	/usr/lib/golang/src/net/http/server.go:2042 +0x44
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc0000e4000, 0x922fe0, 0xc0000d62a0, 0xc0000de200)
+	/root/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0xd3
+net/http.serverHandler.ServeHTTP(0xc0000d61c0, 0x922fe0, 0xc0000d62a0, 0xc0000de200)
+	/usr/lib/golang/src/net/http/server.go:2843 +0xa3
+net/http.(*conn).serve(0xc0000f15e0, 0x923ee0, 0xc000065a00)
+	/usr/lib/golang/src/net/http/server.go:1925 +0x8ad
+created by net/http.(*Server).Serve
+	/usr/lib/golang/src/net/http/server.go:2969 +0x36c
+2021/09/25 23:54:17 http: panic serving 192.168.56.1:58974: runtime error: invalid memory address or nil pointer dereference
+goroutine 9 [running]:
+net/http.(*conn).serve.func1(0xc0000f1540)
+	/usr/lib/golang/src/net/http/server.go:1801 +0x147
+panic(0x82f3e0, 0xb59900)
+	/usr/lib/golang/src/runtime/panic.go:975 +0x47a
+database/sql.(*Stmt).Close(0x0, 0x0, 0x0)
+	/usr/lib/golang/src/database/sql/sql.go:2722 +0x3e
+github.com/yeejiac/BookExchange_webservice/database.InsertBookInfo(0xc000027c20, 0x3, 0x4, 0xc000027c23, 0x3, 0xc0000d4680)
+	/home/Project/BookExchange_webservice/database/mariadbConn.go:43 +0x23d
+github.com/yeejiac/BookExchange_webservice/routes.Create_BookInfo(0x922fe0, 0xc0000d62a0, 0xc0000de400)
+	/home/Project/BookExchange_webservice/routes/bookInfo.go:56 +0x2d5
+net/http.HandlerFunc.ServeHTTP(0x8bb240, 0x922fe0, 0xc0000d62a0, 0xc0000de400)
+	/usr/lib/golang/src/net/http/server.go:2042 +0x44
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc0000e4000, 0x922fe0, 0xc0000d62a0, 0xc0000de200)
+	/root/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0xd3
+net/http.serverHandler.ServeHTTP(0xc0000d61c0, 0x922fe0, 0xc0000d62a0, 0xc0000de200)
+	/usr/lib/golang/src/net/http/server.go:2843 +0xa3
+net/http.(*conn).serve(0xc0000f1540, 0x923ee0, 0xc000065a00)
+	/usr/lib/golang/src/net/http/server.go:1925 +0x8ad
+created by net/http.(*Server).Serve
+	/usr/lib/golang/src/net/http/server.go:2969 +0x36c
+2021/09/25 23:56:02 http: panic serving 192.168.56.1:61927: runtime error: invalid memory address or nil pointer dereference
+goroutine 8 [running]:
+net/http.(*conn).serve.func1(0xc0000ef400)
+	/usr/lib/golang/src/net/http/server.go:1801 +0x147
+panic(0x82f3e0, 0xb59900)
+	/usr/lib/golang/src/runtime/panic.go:975 +0x47a
+database/sql.(*Stmt).Close(0x0, 0x0, 0x0)
+	/usr/lib/golang/src/database/sql/sql.go:2722 +0x3e
+github.com/yeejiac/BookExchange_webservice/database.InsertBookInfo(0xc000027c10, 0x3, 0x4, 0xc000027c13, 0x3, 0xc0000d45b0)
+	/home/Project/BookExchange_webservice/database/mariadbConn.go:36 +0x23d
+github.com/yeejiac/BookExchange_webservice/routes.Create_BookInfo(0x922f60, 0xc0000d62a0, 0xc0000de400)
+	/home/Project/BookExchange_webservice/routes/bookInfo.go:56 +0x2d5
+net/http.HandlerFunc.ServeHTTP(0x8bb1f0, 0x922f60, 0xc0000d62a0, 0xc0000de400)
+	/usr/lib/golang/src/net/http/server.go:2042 +0x44
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc0000e2000, 0x922f60, 0xc0000d62a0, 0xc0000de200)
+	/root/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0xd3
+net/http.serverHandler.ServeHTTP(0xc0000d61c0, 0x922f60, 0xc0000d62a0, 0xc0000de200)
+	/usr/lib/golang/src/net/http/server.go:2843 +0xa3
+net/http.(*conn).serve(0xc0000ef400, 0x923e60, 0xc0000659c0)
+	/usr/lib/golang/src/net/http/server.go:1925 +0x8ad
+created by net/http.(*Server).Serve
+	/usr/lib/golang/src/net/http/server.go:2969 +0x36c
+2021/09/25 23:56:26 http: panic serving 192.168.56.1:60745: runtime error: invalid memory address or nil pointer dereference
+goroutine 8 [running]:
+net/http.(*conn).serve.func1(0xc0000ef400)
+	/usr/lib/golang/src/net/http/server.go:1801 +0x147
+panic(0x82f3e0, 0xb59900)
+	/usr/lib/golang/src/runtime/panic.go:975 +0x47a
+database/sql.(*Stmt).Close(0x0, 0x0, 0x0)
+	/usr/lib/golang/src/database/sql/sql.go:2722 +0x3e
+github.com/yeejiac/BookExchange_webservice/database.InsertBookInfo(0xc000027c10, 0x3, 0x4, 0xc000027c13, 0x3, 0xc0000d45b0)
+	/home/Project/BookExchange_webservice/database/mariadbConn.go:35 +0x23d
+github.com/yeejiac/BookExchange_webservice/routes.Create_BookInfo(0x922f40, 0xc0000d62a0, 0xc0000de400)
+	/home/Project/BookExchange_webservice/routes/bookInfo.go:56 +0x2d5
+net/http.HandlerFunc.ServeHTTP(0x8bb1f0, 0x922f40, 0xc0000d62a0, 0xc0000de400)
+	/usr/lib/golang/src/net/http/server.go:2042 +0x44
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc0000e2000, 0x922f40, 0xc0000d62a0, 0xc0000de200)
+	/root/go/pkg/mod/github.com/gorilla/mux@v1.8.0/mux.go:210 +0xd3
+net/http.serverHandler.ServeHTTP(0xc0000d61c0, 0x922f40, 0xc0000d62a0, 0xc0000de200)
+	/usr/lib/golang/src/net/http/server.go:2843 +0xa3
+net/http.(*conn).serve(0xc0000ef400, 0x923e40, 0xc0000659c0)
+	/usr/lib/golang/src/net/http/server.go:1925 +0x8ad
+created by net/http.(*Server).Serve
+	/usr/lib/golang/src/net/http/server.go:2969 +0x36c

@@ -12,7 +12,7 @@ func RedisConnection() redis.Conn {
 	err := *new(error)
 	rc, err := redis.Dial("tcp", IPPort)
 	if err != nil {
-		fmt.Println("db conn error")
+		fmt.Println("redis conn error")
 		panic(err)
 	}
 	// conn = rc

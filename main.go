@@ -24,6 +24,7 @@ func main() {
 
 	mariadb := database.MariaDBConnection()
 	defer mariadb.Close()
+	routes.SetMariadbConnectionObject(mariadb)
 
 	r := mux.NewRouter()
 	r.HandleFunc("/index", routes.Home).Methods("GET")
