@@ -50,9 +50,10 @@ func Create_BookInfo(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Println(string(b))
 
-	key := t.BookName
-	value := string(b)
-	database.RedisSet(key, value, conn)
+	// key := t.BookName
+	// value := string(b)
+	// database.RedisSet(key, value, conn)
+	database.InsertBookInfo(t, mconn)
 	fmt.Fprintf(w, "Successfully Uploaded File\n")
 }
 

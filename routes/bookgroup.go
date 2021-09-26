@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"database/sql"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -15,9 +16,14 @@ import (
 )
 
 var conn redis.Conn
+var mconn *sql.DB
 
 func SetConnectionObject(rc redis.Conn) {
 	conn = rc
+}
+
+func SetMariadbConnectionObject(conn *sql.DB) {
+	mconn = conn
 }
 
 func Create_BookGroup(w http.ResponseWriter, r *http.Request) { //post
